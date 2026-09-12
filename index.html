@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <title>Caja de Tulipanes Mágica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0; 
@@ -13,14 +16,54 @@
       align-items: center;
       height: 100vh; 
       overflow: hidden; 
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Montserrat', sans-serif;
     }
     .container {
       position: relative; 
       width: 400px; 
-      height: 700px; 
+      height: 800px; 
       cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
+    
+    /* Textos */
+    .title-top {
+      position: absolute;
+      top: 50px;
+      width: 100%;
+      text-align: center;
+      color: #d4af37;
+      font-size: 14px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      font-weight: 600;
+      z-index: 10;
+      text-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+    }
+    .footer-text {
+      position: absolute;
+      bottom: 50px;
+      width: 100%;
+      text-align: center;
+      font-family: 'Great Vibes', cursive;
+      color: #fff3d1;
+      font-size: 36px;
+      z-index: 10;
+      text-shadow: 0 0 15px rgba(255, 215, 0, 0.5), 0 0 30px rgba(255, 180, 0, 0.3);
+    }
+    .heart {
+      color: #ff3366;
+      display: inline-block;
+      animation: pulse-heart 1.5s infinite;
+    }
+    @keyframes pulse-heart {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
     /* Magic particles */
     .particle {
       position: absolute; 
@@ -31,6 +74,7 @@
       opacity: 0; 
       pointer-events: none;
       box-shadow: 0 0 10px #ffd700;
+      z-index: 1;
     }
     .open .particle {
       animation: sparkle 2s ease-out infinite;
@@ -68,179 +112,26 @@
       opacity: 1; 
       animation: draw-ribbon 1s forwards ease-out;
     }
-    
     @keyframes draw-ribbon {
       to { stroke-dashoffset: 0; }
     }
 
     .hint {
       position: absolute; 
-      bottom: 40px; 
+      bottom: 120px; 
       width: 100%; 
       text-align: center;
       color: #f1c40f; 
-      font-size: 14px; 
-      letter-spacing: 3px;
+      font-size: 12px; 
+      letter-spacing: 2px;
       text-transform: uppercase; 
       pointer-events: none;
       transition: opacity 0.5s;
       animation: pulse 1.5s infinite;
+      z-index: 10;
     }
     @keyframes pulse {
-      0%, 100% { opacity: 0.5; }
+      0%, 100% { opacity: 0.4; }
       50% { opacity: 1; }
     }
     .open ~ .hint { opacity: 0; display: none; }
-  </style>
-</head>
-<body>
-  <div class="container" onclick="this.classList.toggle('open')">
-    <svg viewBox="0 0 400 700" width="100%" height="100%">
-      <defs>
-        <!-- Gradients -->
-        <linearGradient id="boxGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#f1c40f"/>
-          <stop offset="100%" stop-color="#d4ac0d"/>
-        </linearGradient>
-        <linearGradient id="coneGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#f5e0c3"/>
-          <stop offset="50%" stop-color="#e3c5a1"/>
-          <stop offset="100%" stop-color="#c2a077"/>
-        </linearGradient>
-        <linearGradient id="coneInner" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#997a5c"/>
-          <stop offset="100%" stop-color="#7a5c40"/>
-        </linearGradient>
-
-        <!-- Tulip definition -->
-        <g id="tulip_flower">
-          <!-- Stem -->
-          <path d="M 0,20 Q 5,60 0,120" fill="none" stroke="#2d5a27" stroke-width="5" stroke-linecap="round"/>
-          
-          <!-- Back Petal (Darker) -->
-          <path d="M -12,-2 C -12,-32 12,-32 12,-2 C 12,18 -12,18 -12,-2 Z" fill="#d4af37"/>
-          
-          <!-- Left Petal -->
-          <path d="M 0,22 C -28,22 -25,-18 -16,-30 C -10,-8 -3,15 0,22 Z" fill="#f1c40f"/>
-          
-          <!-- Right Petal -->
-          <path d="M 0,22 C 28,22 25,-18 16,-30 C 10,-8 3,15 0,22 Z" fill="#ffcd38"/>
-          
-          <!-- Front Center Overlap (Adds realistic detail) -->
-          <path d="M -8,18 C -15,5 0,-15 0,-15 C 0,-15 15,5 8,18 C 3,22 -3,22 -8,18 Z" fill="#ffea00"/>
-        </g>
-
-        <!-- Leaf definition -->
-        <g id="tulip_leaf">
-          <path d="M 0,0 C -25,-40 -35,-90 0,-120 C 15,-70 20,-30 0,0 Z" fill="#386b32"/>
-        </g>
-      </defs>
-
-      <!-- BOUQUET GROUP -->
-      <g id="bouquet" transform="translate(200, 220)">
-        
-        <!-- Back leaves -->
-        <use href="#tulip_leaf" x="-20" y="50" transform="rotate(-35, -20, 50) scale(0.9)"/>
-        <use href="#tulip_leaf" x="20" y="60" transform="rotate(35, 20, 60) scale(1)"/>
-
-        <!-- Back Row Tulips -->
-        <use href="#tulip_flower" x="-55" y="-30" transform="rotate(-25, -55, -30) scale(0.9)" />
-        <use href="#tulip_flower" x="55" y="-25" transform="rotate(25, 55, -25) scale(0.9)" />
-        
-        <!-- Middle Row Tulips -->
-        <use href="#tulip_flower" x="-25" y="-10" transform="rotate(-12, -25, -10)" />
-        <use href="#tulip_flower" x="30" y="-5" transform="rotate(12, 30, -5)" />
-        
-        <!-- Front Center Tulip (Highest) -->
-        <use href="#tulip_flower" x="2" y="15" transform="scale(1.15)"/>
-        
-        <!-- Front leaves for depth -->
-        <use href="#tulip_leaf" x="-15" y="90" transform="rotate(-15, -15, 90) scale(0.7)"/>
-        <use href="#tulip_leaf" x="18" y="85" transform="rotate(20, 18, 85) scale(0.75)"/>
-
-        <!-- WRAPPING CONE -->
-        <g transform="translate(0, 70)">
-          <!-- Inside of cone (opening) -->
-          <path d="M -80,0 C -40,-25 40,-25 80,0 C 40,20 -40,20 -80,0 Z" fill="url(#coneInner)"/>
-          
-          <!-- Outside of cone (closes perfectly at bottom) -->
-          <path d="M -80,0 C -40,25 40,25 80,0 L 0,220 Z" fill="url(#coneGrad)"/>
-          
-          <!-- Paper folds to make it look realistic -->
-          <path d="M -80,0 L 0,220 L -35,15 Z" fill="rgba(0,0,0,0.05)"/>
-          <path d="M 80,0 L 0,220 L 35,15 Z" fill="rgba(255,255,255,0.2)"/>
-          <path d="M -20,20 L 0,220 L 20,20 Z" fill="rgba(0,0,0,0.03)"/>
-
-          <!-- Ribbon tied around the cone base -->
-          <path d="M -30,140 C 0,160 30,140 35,150 C 0,170 -35,150 -30,140 Z" fill="#c0392b"/>
-          <circle cx="2" cy="150" r="5" fill="#e74c3c"/>
-          <!-- Little ribbon tails on cone -->
-          <path d="M 2,150 L -15,180 L -5,182 Z" fill="#e74c3c"/>
-          <path d="M 2,150 L 15,180 L 5,182 Z" fill="#c0392b"/>
-        </g>
-      </g>
-
-      <!-- GIFT BOX (Body) -->
-      <g id="box-body" transform="translate(200, 480)">
-        <!-- Box Shadow -->
-        <ellipse cx="0" cy="120" rx="100" ry="15" fill="rgba(0,0,0,0.6)" filter="blur(5px)"/>
-        
-        <!-- Main Yellow Box -->
-        <rect x="-100" y="0" width="200" height="130" rx="8" fill="url(#boxGrad)"/>
-        
-        <!-- Vertical Red Ribbon -->
-        <rect x="-18" y="0" width="36" height="130" fill="#e74c3c"/>
-        <rect x="-18" y="0" width="5" height="130" fill="rgba(0,0,0,0.2)"/> <!-- ribbon shadow -->
-        
-        <!-- Untied Ribbon (Appears when box opens) -->
-        <g id="untied-ribbon">
-          <!-- Left flowing ribbon -->
-          <path d="M -18,10 C -70,-20 -100,50 -60,110" fill="none" stroke="#e74c3c" stroke-width="14" stroke-linecap="round"/>
-          <!-- Right flowing ribbon -->
-          <path d="M 18,10 C 70,-20 100,50 60,110" fill="none" stroke="#e74c3c" stroke-width="14" stroke-linecap="round"/>
-          <!-- Ribbon tails -->
-          <path d="M -10,10 C -40,80 -80,140 -50,150" fill="none" stroke="#c0392b" stroke-width="14" stroke-linecap="round"/>
-          <path d="M 10,10 C 40,80 80,140 50,150" fill="none" stroke="#c0392b" stroke-width="14" stroke-linecap="round"/>
-        </g>
-      </g>
-
-      <!-- GIFT BOX LID -->
-      <g id="lid" transform="translate(200, 475)">
-        <rect x="-105" y="-25" width="210" height="35" rx="5" fill="#f39c12"/>
-        <rect x="-105" y="10" width="210" height="5" fill="rgba(0,0,0,0.15)"/>
-        
-        <!-- Lid Ribbon -->
-        <rect x="-18" y="-25" width="36" height="35" fill="#e74c3c"/>
-        
-        <!-- Tied Bow -->
-        <g id="tied-ribbon">
-          <!-- Left loop -->
-          <path d="M 0,-25 C -50,-80 -100,-10 -20,-10 Z" fill="#e74c3c"/>
-          <path d="M 0,-25 C -40,-60 -70,-15 -20,-15 Z" fill="#c0392b"/> <!-- inner loop -->
-          <!-- Right loop -->
-          <path d="M 0,-25 C 50,-80 100,-10 20,-10 Z" fill="#e74c3c"/>
-          <path d="M 0,-25 C 40,-60 70,-15 20,-15 Z" fill="#c0392b"/> <!-- inner loop -->
-          <!-- Center knot -->
-          <circle cx="0" cy="-18" r="12" fill="#e74c3c"/>
-          <circle cx="-2" cy="-20" r="4" fill="rgba(255,255,255,0.3)"/> <!-- highlight -->
-        </g>
-      </g>
-    </svg>
-    <div class="hint">Toca la caja para abrir</div>
-  </div>
-
-  <script>
-     // Create floating magical particles
-     const container = document.querySelector('.container');
-     for(let i = 0; i < 40; i++) {
-        let p = document.createElement('div');
-        p.className = 'particle';
-        p.style.left = (Math.random() * 380 + 10) + 'px';
-        p.style.top = (Math.random() * 300 + 150) + 'px';
-        p.style.animationDelay = (Math.random() * 2) + 's';
-        p.style.animationDuration = (Math.random() * 1.5 + 1.5) + 's';
-        container.appendChild(p);
-     }
-  </script>
-</body>
-</html>
