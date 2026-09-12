@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para la Doctora más Hermosa ❤️</title>
-    <!-- Fuente elegante de Google Fonts -->
+    <title>Una Sorpresa Especial - Para la Doctora más Hermosa ❤️</title>
+    <!-- Fuentes elegantes de Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -17,7 +17,7 @@
         }
 
         body {
-            background-color: #050508;
+            background-color: #030305;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -26,24 +26,24 @@
             overflow: hidden;
         }
 
-        /* Contenedor principal con formato vertical tipo celular (390x850 px) */
+        /* Contenedor formato celular (390 x 850 px) */
         .card-container {
             width: 390px;
             height: 850px;
-            background: radial-gradient(circle at 50% 45%, #2a1f0d 0%, #0d0a05 45%, #030305 100%);
+            background: radial-gradient(circle at 50% 40%, #221808 0%, #0c0803 50%, #020204 100%);
             border-radius: 40px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9), 0 0 30px rgba(212, 175, 55, 0.15);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.95), 0 0 35px rgba(212, 175, 55, 0.2);
             position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
-            padding: 30px 20px 40px 20px;
-            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 35px 20px 30px 20px;
+            border: 1px solid rgba(212, 175, 55, 0.25);
         }
 
-        /* Canvas para estrellas y partículas doradas */
+        /* Canvas para partículas doradas y estrellas */
         #particles-canvas {
             position: absolute;
             top: 0;
@@ -54,85 +54,98 @@
             z-index: 1;
         }
 
-        /* Título superior sutil */
+        /* Texto Superior */
         .top-subtitle {
-            font-size: 14px;
-            letter-spacing: 3px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 4px;
             text-transform: uppercase;
-            color: rgba(212, 175, 55, 0.7);
-            margin-top: 15px;
-            z-index: 2;
+            color: #f3e5ab;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+            z-index: 3;
             opacity: 0;
-            animation: fadeIn 2s ease-in-out forwards 0.5s;
+            animation: fadeIn 1.5s ease-in-out forwards 0.3s;
         }
 
-        /* Área de la escena SVG del Ramo */
-        .bouquet-wrapper {
+        /* Escena Principal */
+        .scene-wrapper {
             position: relative;
             width: 100%;
-            height: 580px;
+            height: 640px;
             display: flex;
             justify-content: center;
-            align-items: flex-end;
+            align-items: center;
             z-index: 2;
         }
 
-        .bouquet-svg {
-            width: 360px;
-            height: 560px;
+        .scene-svg {
+            width: 380px;
+            height: 630px;
             overflow: visible;
         }
 
-        /* Animaciones CSS del SVG */
-        .grow-stem {
-            stroke-dasharray: 600;
-            stroke-dashoffset: 600;
-            animation: growStem 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        }
-
-        .flower-bud {
-            transform-origin: center;
-            transform: scale(0);
+        /* --- ANIMACIONES DE LA CAJA --- */
+        
+        /* Descenso/Aparición de la Caja */
+        .gift-box-group {
             opacity: 0;
-            animation: popFlower 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            transform: translateY(50px);
+            animation: dropBox 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 0.8s;
+            transform-origin: center bottom;
         }
 
-        .wrapper-paper {
+        /* Levantamiento y apertura de la tapa de la caja */
+        .box-lid {
+            transform-origin: 195px 400px;
+            animation: openLid 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards 2.5s;
+        }
+
+        /* Sombra de la tapa al abrirse */
+        .lid-glow {
             opacity: 0;
-            transform: translateY(40px) scale(0.9);
-            animation: showWrapper 1.8s ease-out forwards 1.2s;
-            transform-origin: bottom center;
+            animation: lidFlash 1.5s ease-out forwards 2.7s;
         }
 
-        .ribbon-bow {
+        /* Desvanecimiento del cuerpo de la caja para centrar la atención en el ramo */
+        .box-body-fade {
+            animation: fadeBoxBody 1.5s ease-in-out forwards 4.0s;
+        }
+
+        /* --- ANIMACIONES DEL RAMO Y TULIPANES --- */
+
+        /* Salida del Ramo desde la Caja */
+        .bouquet-rise {
             opacity: 0;
-            transform: scale(0.5);
-            animation: popRibbon 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 2.2s;
-            transform-origin: center;
+            transform: translateY(160px) scale(0.65);
+            animation: riseBouquet 2.2s cubic-bezier(0.25, 1, 0.5, 1) forwards 3.2s;
+            transform-origin: 195px 500px;
         }
 
+        /* Balanceo suave estilo brisa */
         .sway-gentle {
-            animation: sway 4s ease-in-out infinite alternate;
-            transform-origin: 200px 500px;
+            animation: sway 5s ease-in-out infinite alternate 5.5s;
+            transform-origin: 195px 520px;
         }
 
-        .leaf-pop {
-            transform-origin: center;
+        /* Crecimiento de Tulipanes */
+        .tulip-bloom {
+            transform-origin: center bottom;
             opacity: 0;
-            transform: scale(0);
-            animation: popLeaf 1.2s ease-out forwards;
+            transform: scale(0.2);
+            animation: bloomTulip 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 
-        .sparkle-star {
-            animation: pulseGlow 2s ease-in-out infinite alternate;
+        /* Brillo destello en tulipanes */
+        .sparkle-pop {
+            animation: pulseGlow 2.5s ease-in-out infinite alternate;
         }
 
-        /* Texto Romántico */
+        /* --- TEXTO INFERIOR --- */
         .romantic-text-container {
             text-align: center;
-            z-index: 2;
-            margin-bottom: 20px;
-            min-height: 80px;
+            z-index: 3;
+            min-height: 70px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -140,48 +153,16 @@
 
         .romantic-text {
             font-family: 'Great Vibes', cursive;
-            font-size: 34px;
-            color: #ffe699;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.6), 0 0 20px rgba(255, 180, 0, 0.3);
+            font-size: 33px;
+            color: #fff3cc;
+            text-shadow: 0 0 12px rgba(255, 215, 0, 0.8), 0 0 22px rgba(255, 180, 0, 0.4);
             opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 2s ease-out forwards 3.2s;
-            line-height: 1.2;
+            transform: translateY(15px);
+            animation: fadeInUp 1.8s ease-out forwards 4.8s;
+            line-height: 1.1;
         }
 
-        /* Keyframes */
-        @keyframes growStem {
-            to { stroke-dashoffset: 0; }
-        }
-
-        @keyframes popFlower {
-            0% { transform: scale(0); opacity: 0; }
-            70% { transform: scale(1.1); opacity: 1; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        @keyframes showWrapper {
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        @keyframes popRibbon {
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        @keyframes popLeaf {
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        @keyframes sway {
-            0% { transform: rotate(-1.5deg); }
-            100% { transform: rotate(1.5deg); }
-        }
-
-        @keyframes pulseGlow {
-            0% { opacity: 0.3; transform: scale(0.8); }
-            100% { opacity: 1; transform: scale(1.2); }
-        }
-
+        /* KEYFRAMES */
         @keyframes fadeIn {
             to { opacity: 1; }
         }
@@ -189,221 +170,367 @@
         @keyframes fadeInUp {
             to { opacity: 1; transform: translateY(0); }
         }
+
+        @keyframes dropBox {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes openLid {
+            0% { transform: translateY(0) rotate(0deg); }
+            30% { transform: translateY(-35px) rotate(-5deg); }
+            100% { transform: translateY(-190px) rotate(-18deg) scale(0.85); opacity: 0; }
+        }
+
+        @keyframes lidFlash {
+            0% { opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { opacity: 0; }
+        }
+
+        @keyframes fadeBoxBody {
+            0% { opacity: 1; }
+            100% { opacity: 0.25; transform: translateY(40px) scale(0.9); }
+        }
+
+        @keyframes riseBouquet {
+            0% { opacity: 0; transform: translateY(160px) scale(0.65); }
+            60% { opacity: 1; transform: translateY(-30px) scale(1.03); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes bloomTulip {
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes sway {
+            0% { transform: rotate(-2deg); }
+            100% { transform: rotate(2deg); }
+        }
+
+        @keyframes pulseGlow {
+            0% { opacity: 0.4; transform: scale(0.85); }
+            100% { opacity: 1; transform: scale(1.15); }
+        }
     </style>
 </head>
 <body>
 
     <div class="card-container">
-        <!-- Fondo interactivo con partículas -->
+        <!-- Canvas de Partículas Doradas y Estrellas -->
         <canvas id="particles-canvas"></canvas>
 
-        <div class="top-subtitle">Una Sorpresa Especial</div>
+        <!-- Texto Superior -->
+        <div class="top-subtitle">UNA SORPRESA ESPECIAL</div>
 
-        <!-- Ramo de Flores SVG -->
-        <div class="bouquet-wrapper">
-            <svg class="bouquet-svg sway-gentle" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
+        <!-- Contenedor de la Escena SVG -->
+        <div class="scene-wrapper">
+            <svg class="scene-svg" viewBox="0 0 390 630" xmlns="http://www.w3.org/2000/svg">
                 <defs>
-                    <!-- Defs para degradados y filtros de iluminación -->
-                    <!-- Brillo de las flores -->
-                    <filter id="glow-gold" x="-30%" y="-30%" width="160%" height="160%">
-                        <feGaussianBlur stdDeviation="10" result="blur" />
+                    <!-- FILTROS DE ILUMINACIÓN Y BRILLO -->
+                    <filter id="gold-glow" x="-30%" y="-30%" width="160%" height="160%">
+                        <feGaussianBlur stdDeviation="8" result="blur" />
                         <feComposite in="SourceGraphic" in2="blur" operator="over" />
                     </filter>
                     
-                    <filter id="glow-soft" x="-20%" y="-20%" width="140%" height="140%">
-                        <feGaussianBlur stdDeviation="5" result="blur" />
+                    <filter id="soft-glow" x="-20%" y="-20%" width="140%" height="140%">
+                        <feGaussianBlur stdDeviation="4" result="blur" />
                         <feComposite in="SourceGraphic" in2="blur" operator="over" />
                     </filter>
 
-                    <!-- Degradados de Flores Tulipa / Girasol estilizado -->
-                    <linearGradient id="yellow-petal" x1="0%" y1="100%" x2="0%" y2="0%">
-                        <stop offset="0%" stop-color="#e69500" />
-                        <stop offset="45%" stop-color="#ffcc00" />
-                        <stop offset="90%" stop-color="#ffee77" />
-                        <stop offset="100%" stop-color="#ffffff" />
-                    </linearGradient>
-
-                    <linearGradient id="yellow-petal-bright" x1="0%" y1="100%" x2="0%" y2="0%">
-                        <stop offset="0%" stop-color="#ffaa00" />
-                        <stop offset="60%" stop-color="#ffdd33" />
-                        <stop offset="100%" stop-color="#ffffbb" />
-                    </linearGradient>
-
-                    <!-- Degradados de Tallos -->
-                    <linearGradient id="stem-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stop-color="#2d5a27" />
-                        <stop offset="50%" stop-color="#4e8b39" />
-                        <stop offset="100%" stop-color="#1e3e18" />
-                    </linearGradient>
-
-                    <!-- Degradados de Hojas -->
-                    <linearGradient id="leaf-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#5a9e32" />
-                        <stop offset="100%" stop-color="#224817" />
-                    </linearGradient>
-
-                    <!-- Degradado Envoltorio Papel Crema Premium -->
-                    <linearGradient id="paper-front" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#fdfbf7" />
-                        <stop offset="50%" stop-color="#ebdccb" />
-                        <stop offset="100%" stop-color="#cbb59d" />
-                    </linearGradient>
-
-                    <linearGradient id="paper-back" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stop-color="#d4c0a8" />
-                        <stop offset="100%" stop-color="#a89279" />
-                    </linearGradient>
-
-                    <linearGradient id="ribbon-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#ecc6b0" />
-                        <stop offset="50%" stop-color="#c99c82" />
-                        <stop offset="100%" stop-color="#9e6f56" />
-                    </linearGradient>
-
-                    <!-- Sombra Paralela -->
-                    <filter id="drop-shadow" x="-10%" y="-10%" width="130%" height="130%">
-                        <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000" flood-opacity="0.4" />
+                    <filter id="shadow-3d" x="-20%" y="-20%" width="140%" height="140%">
+                        <feDropShadow dx="0" dy="10" stdDeviation="8" flood-color="#000000" flood-opacity="0.6" />
                     </filter>
+
+                    <!-- DEGRADADOS DE PÉTALOS TULIPÁN REAL -->
+                    <linearGradient id="tulip-petal-main" x1="0%" y1="100%" x2="0%" y2="0%">
+                        <stop offset="0%" stop-color="#d47a00" />
+                        <stop offset="30%" stop-color="#ffb700" />
+                        <stop offset="75%" stop-color="#ffe600" />
+                        <stop offset="100%" stop-color="#ffffaa" />
+                    </linearGradient>
+
+                    <linearGradient id="tulip-petal-side" x1="0%" y1="100%" x2="0%" y2="0%">
+                        <stop offset="0%" stop-color="#b86200" />
+                        <stop offset="40%" stop-color="#ffa000" />
+                        <stop offset="85%" stop-color="#ffea55" />
+                        <stop offset="100%" stop-color="#ffffcc" />
+                    </linearGradient>
+
+                    <linearGradient id="tulip-petal-inner" x1="0%" y1="100%" x2="0%" y2="0%">
+                        <stop offset="0%" stop-color="#8a4300" />
+                        <stop offset="50%" stop-color="#e68a00" />
+                        <stop offset="100%" stop-color="#ffd233" />
+                    </linearGradient>
+
+                    <!-- DEGRADADOS DE TALLOS Y HOJAS -->
+                    <linearGradient id="stem-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#224817" />
+                        <stop offset="50%" stop-color="#4d8b38" />
+                        <stop offset="100%" stop-color="#193810" />
+                    </linearGradient>
+
+                    <linearGradient id="leaf-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#5c9c38" />
+                        <stop offset="50%" stop-color="#3b6e22" />
+                        <stop offset="100%" stop-color="#1c380f" />
+                    </linearGradient>
+
+                    <linearGradient id="leaf-grad-2" x1="100%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#72b547" />
+                        <stop offset="70%" stop-color="#2d5918" />
+                        <stop offset="100%" stop-color="#142b0a" />
+                    </linearGradient>
+
+                    <!-- DEGRADADOS ENVOLTORIO RAMO (Papel Crema/Dorado) -->
+                    <linearGradient id="paper-outer" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#fefcf0" />
+                        <stop offset="40%" stop-color="#ede0ca" />
+                        <stop offset="85%" stop-color="#cbb596" />
+                        <stop offset="100%" stop-color="#a38c6d" />
+                    </linearGradient>
+
+                    <linearGradient id="paper-inner" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#d1be9d" />
+                        <stop offset="100%" stop-color="#a18b6e" />
+                    </linearGradient>
+
+                    <!-- DEGRADADOS CAJA DE REGALO -->
+                    <linearGradient id="box-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#fbe8a6" />
+                        <stop offset="30%" stop-color="#d4af37" />
+                        <stop offset="70%" stop-color="#aa820a" />
+                        <stop offset="100%" stop-color="#614800" />
+                    </linearGradient>
+
+                    <linearGradient id="ribbon-red" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#e62e00" />
+                        <stop offset="50%" stop-color="#ff6666" />
+                        <stop offset="100%" stop-color="#990000" />
+                    </linearGradient>
+
+                    <linearGradient id="tag-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#ffffff" />
+                        <stop offset="100%" stop-color="#f0e3ce" />
+                    </linearGradient>
                 </defs>
 
-                <!-- TALLOS EN CRECIMIENTO -->
-                <g id="stems">
-                    <!-- Tallo Flor Trasera Izquierda -->
-                    <path class="grow-stem" d="M 195 480 Q 150 320 130 180" stroke="url(#stem-grad)" stroke-width="7" fill="none" stroke-linecap="round" style="animation-delay: 0.1s;" />
-                    
-                    <!-- Tallo Flor Trasera Derecha -->
-                    <path class="grow-stem" d="M 205 480 Q 240 310 230 150" stroke="url(#stem-grad)" stroke-width="7" fill="none" stroke-linecap="round" style="animation-delay: 0.2s;" />
+                <!-- ==================== CAJA DE REGALO ==================== -->
+                <g class="gift-box-group">
+                    <!-- Sombra Base de la Caja -->
+                    <ellipse cx="195" cy="530" rx="110" ry="22" fill="#000000" opacity="0.65" />
 
-                    <!-- Tallo Flor Centro Alta -->
-                    <path class="grow-stem" d="M 200 480 Q 195 330 185 210" stroke="url(#stem-grad)" stroke-width="8" fill="none" stroke-linecap="round" style="animation-delay: 0.3s;" />
+                    <!-- CUERPO DE LA CAJA -->
+                    <g class="box-body-fade" filter="url(#shadow-3d)">
+                        <!-- Cara Frontal Base -->
+                        <path d="M 105 410 L 285 410 L 275 515 C 275 523 265 530 255 530 L 135 530 C 125 530 115 523 115 515 Z" fill="url(#box-gold)" />
+                        <!-- Detalle Pliegue 3D Frontal -->
+                        <path d="M 105 410 L 195 425 L 285 410 L 275 515 L 195 530 L 115 515 Z" fill="rgba(255,255,255,0.08)" />
+                        <!-- Cinta Vertical Caja -->
+                        <rect x="180" y="413" width="30" height="115" fill="url(#ribbon-red)" />
+                        <rect x="182" y="413" width="6" height="115" fill="#ffa3a3" opacity="0.5" />
+                    </g>
 
-                    <!-- Tallo Flor Frontal Izquierda -->
-                    <path class="grow-stem" d="M 190 480 Q 130 360 115 280" stroke="url(#stem-grad)" stroke-width="7.5" fill="none" stroke-linecap="round" style="animation-delay: 0.4s;" />
-
-                    <!-- Tallo Flor Frontal Derecha -->
-                    <path class="grow-stem" d="M 210 480 Q 255 350 245 280" stroke="url(#stem-grad)" stroke-width="7.5" fill="none" stroke-linecap="round" style="animation-delay: 0.5s;" />
+                    <!-- TAPA DE LA CAJA (ANIMADA) -->
+                    <g class="box-lid" filter="url(#shadow-3d)">
+                        <!-- Destello al abrir -->
+                        <ellipse class="lid-glow" cx="195" cy="395" rx="100" ry="30" fill="#ffe680" filter="url(#gold-glow)" />
+                        <!-- Borde / Tapa Principal -->
+                        <path d="M 95 385 C 95 378 105 370 120 370 L 270 370 C 285 370 295 378 295 385 L 290 412 C 290 417 280 422 265 422 L 125 422 C 110 422 100 417 100 412 Z" fill="url(#box-gold)" />
+                        <!-- Cinta Tapa Horizontal y Vertical -->
+                        <rect x="178" y="370" width="34" height="51" fill="url(#ribbon-red)" />
+                        <!-- Lazo Superior Tapa -->
+                        <path d="M 195 370 C 160 330 120 365 180 372 Z" fill="url(#ribbon-red)" />
+                        <path d="M 195 370 C 230 330 270 365 210 372 Z" fill="url(#ribbon-red)" />
+                        <circle cx="195" cy="370" r="8" fill="#ff8080" />
+                    </g>
                 </g>
 
-                <!-- HOJAS -->
-                <g id="leaves">
-                    <!-- Hojas variadas por el ramo -->
-                    <path class="leaf-pop" d="M 155 330 C 110 320 90 280 110 260 C 130 260 155 290 155 330 Z" fill="url(#leaf-grad)" style="animation-delay: 1.0s;" />
-                    <path class="leaf-pop" d="M 230 320 C 275 300 295 260 270 245 C 250 250 230 280 230 320 Z" fill="url(#leaf-grad)" style="animation-delay: 1.1s;" />
-                    <path class="leaf-pop" d="M 185 360 C 140 370 120 400 135 420 C 155 410 180 390 185 360 Z" fill="url(#leaf-grad)" style="animation-delay: 1.2s;" />
-                    <path class="leaf-pop" d="M 210 350 C 260 360 285 390 270 410 C 245 400 215 380 210 350 Z" fill="url(#leaf-grad)" style="animation-delay: 1.3s;" />
-                    <path class="leaf-pop" d="M 175 250 C 145 220 150 180 165 180 C 175 190 180 220 175 250 Z" fill="url(#leaf-grad)" style="animation-delay: 1.4s;" />
-                    <path class="leaf-pop" d="M 215 240 C 245 210 235 170 220 175 C 215 185 210 210 215 240 Z" fill="url(#leaf-grad)" style="animation-delay: 1.5s;" />
-                </g>
+                <!-- ==================== RAMO DE TULIPANES ==================== -->
+                <g class="bouquet-rise">
+                    <g class="sway-gentle">
 
-                <!-- PAPEL TRASERO DEL ENVOLTORIO -->
-                <g class="wrapper-paper" filter="url(#drop-shadow)">
-                    <polygon points="110,240 290,240 235,490 165,490" fill="url(#paper-back)" />
-                </g>
+                        <!-- FONDOS Y PAPEL TRASERO DEL ENVOLTORIO -->
+                        <g filter="url(#shadow-3d)">
+                            <!-- Papel Trasero Desplegado -->
+                            <path d="M 100 240 L 195 150 L 290 240 L 235 470 L 155 470 Z" fill="url(#paper-inner)" />
+                        </g>
 
-                <!-- FLORES (4 PRINCIPALES + SECUNDARIAS PARA LUZ Y VOLUMEN SEGÚN REFERENCIA) -->
-                <!-- Flor 1: Fondo Izquierda Alta -->
-                <g class="flower-bud" style="animation-delay: 1.6s; transform-origin: 130px 180px;" filter="url(#glow-gold)">
-                    <!-- Resplandor de fondo -->
-                    <circle cx="130" cy="180" r="35" fill="#ffaa00" opacity="0.25" />
-                    <!-- Capa externa pétalos -->
-                    <path d="M 110 180 C 100 140 125 130 130 130 C 135 130 160 140 150 180 C 140 200 120 200 110 180 Z" fill="url(#yellow-petal)" />
-                    <!-- Capa central tulipa -->
-                    <path d="M 115 175 C 110 145 128 135 130 135 C 132 135 150 145 145 175 C 140 190 120 190 115 175 Z" fill="url(#yellow-petal-bright)" />
-                    <path d="M 122 170 C 120 150 130 142 130 142 C 130 142 140 150 138 170 Z" fill="#fff5aa" opacity="0.8" />
-                </g>
+                        <!-- TALLOS REALISTAS DE TULIPÁN -->
+                        <g id="stems">
+                            <!-- Tallo 1 (Centro Alto) -->
+                            <path d="M 195 440 Q 192 310 195 180" stroke="url(#stem-grad)" stroke-width="8" stroke-linecap="round" fill="none" />
+                            <!-- Tallo 2 (Izquierda Alto) -->
+                            <path d="M 190 440 Q 160 320 145 210" stroke="url(#stem-grad)" stroke-width="7.5" stroke-linecap="round" fill="none" />
+                            <!-- Tallo 3 (Derecha Alto) -->
+                            <path d="M 200 440 Q 230 320 245 220" stroke="url(#stem-grad)" stroke-width="7.5" stroke-linecap="round" fill="none" />
+                            <!-- Tallo 4 (Izquierda Medio) -->
+                            <path d="M 185 440 Q 135 340 115 255" stroke="url(#stem-grad)" stroke-width="7" stroke-linecap="round" fill="none" />
+                            <!-- Tallo 5 (Derecha Medio) -->
+                            <path d="M 205 440 Q 255 350 270 265" stroke="url(#stem-grad)" stroke-width="7" stroke-linecap="round" fill="none" />
+                        </g>
 
-                <!-- Flor 2: Fondo Derecha Alta -->
-                <g class="flower-bud" style="animation-delay: 1.8s; transform-origin: 230px 150px;" filter="url(#glow-gold)">
-                    <circle cx="230" cy="150" r="38" fill="#ffaa00" opacity="0.25" />
-                    <path d="M 208 150 C 198 105 224 95 230 95 C 236 95 262 105 252 150 C 242 172 218 172 208 150 Z" fill="url(#yellow-petal)" />
-                    <path d="M 214 145 C 208 112 228 102 230 102 C 232 102 252 112 246 145 C 240 162 220 162 214 145 Z" fill="url(#yellow-petal-bright)" />
-                    <path d="M 221 140 C 218 120 230 110 230 110 C 230 110 242 120 239 140 Z" fill="#fff5aa" opacity="0.8" />
-                </g>
+                        <!-- HOJAS LARGAS TÍPICAS DE TULIPÁN -->
+                        <g id="leaves">
+                            <!-- Hoja Izquierda Extendida -->
+                            <path d="M 185 410 Q 110 350 90 260 Q 130 290 175 360 Z" fill="url(#leaf-grad-1)" />
+                            <!-- Hoja Derecha Extendida -->
+                            <path d="M 205 410 Q 280 350 300 270 Q 260 300 215 360 Z" fill="url(#leaf-grad-2)" />
+                            <!-- Hoja Central 1 -->
+                            <path d="M 190 380 Q 140 280 165 210 Q 175 260 192 330 Z" fill="url(#leaf-grad-2)" />
+                            <!-- Hoja Central 2 -->
+                            <path d="M 200 380 Q 250 290 225 220 Q 215 270 198 330 Z" fill="url(#leaf-grad-1)" />
+                        </g>
 
-                <!-- Flor 3: Centro Media -->
-                <g class="flower-bud" style="animation-delay: 2.0s; transform-origin: 185px 210px;" filter="url(#glow-gold)">
-                    <circle cx="185" cy="210" r="40" fill="#ffaa00" opacity="0.3" />
-                    <path d="M 160 210 C 148 160 178 150 185 150 C 192 150 222 160 210 210 C 198 235 172 235 160 210 Z" fill="url(#yellow-petal)" />
-                    <path d="M 167 205 C 160 168 183 158 185 158 C 187 158 210 168 203 205 C 196 225 174 225 167 205 Z" fill="url(#yellow-petal-bright)" />
-                    <path d="M 175 200 C 172 175 185 165 185 165 C 185 165 198 175 195 200 Z" fill="#ffffff" opacity="0.85" />
-                </g>
+                        <!-- NUBES DE NUBECITAS / FLORES BLANCAS DE RELLENO (BABY'S BREATH) -->
+                        <g id="fillers" opacity="0.9">
+                            <!-- Ramitos blancos pequeñitos -->
+                            <g stroke="#ffffff" stroke-width="1.5" fill="#ffffff">
+                                <path d="M 140 270 L 130 255 M 140 270 L 145 250 M 140 270 L 125 265" />
+                                <circle cx="130" cy="255" r="3" /> <circle cx="145" cy="250" r="3.5" /> <circle cx="125" cy="265" r="2.5" />
+                                
+                                <path d="M 250 280 L 265 265 M 250 280 L 255 260 M 250 280 L 270 275" />
+                                <circle cx="265" cy="265" r="3" /> <circle cx="255" cy="260" r="3.5" /> <circle cx="270" cy="275" r="2.5" />
 
-                <!-- Flor 4: Frontal Derecha -->
-                <g class="flower-bud" style="animation-delay: 2.2s; transform-origin: 245px 280px;" filter="url(#glow-gold)">
-                    <circle cx="245" cy="280" r="42" fill="#ffaa00" opacity="0.3" />
-                    <path d="M 218 280 C 205 225 238 215 245 215 C 252 215 285 225 272 280 C 258 308 232 308 218 280 Z" fill="url(#yellow-petal)" />
-                    <path d="M 226 274 C 218 234 243 223 245 223 C 247 223 272 234 264 274 C 256 295 234 295 226 274 Z" fill="url(#yellow-petal-bright)" />
-                    <path d="M 235 268 C 231 242 245 230 245 230 C 245 230 259 242 255 268 Z" fill="#ffffff" opacity="0.9" />
-                </g>
+                                <path d="M 195 250 L 190 235 M 195 250 L 205 230" />
+                                <circle cx="190" cy="235" r="3" /> <circle cx="205" cy="230" r="3" />
+                            </g>
+                        </g>
 
-                <!-- Flor 5 (Frontal Izquierda complementaria estilo bouquet de imagen) -->
-                <g class="flower-bud" style="animation-delay: 2.4s; transform-origin: 115px 280px;" filter="url(#glow-gold)">
-                    <circle cx="115" cy="280" r="38" fill="#ffaa00" opacity="0.3" />
-                    <path d="M 90 280 C 78 230 108 220 115 220 C 122 220 152 230 140 280 C 128 305 102 305 90 280 Z" fill="url(#yellow-petal)" />
-                    <path d="M 97 274 C 90 237 113 228 115 228 C 117 228 140 237 133 274 C 125 292 105 292 97 274 Z" fill="url(#yellow-petal-bright)" />
-                    <path d="M 106 268 C 102 245 115 235 115 235 C 115 235 128 245 124 268 Z" fill="#ffffff" opacity="0.85" />
-                </g>
+                        <!-- ================= 5 TULIPANES REALISTAS ================= -->
 
-                <!-- PAPEL FRONTAL DEL ENVOLTORIO CON ESTILO Y SOMBRAS 3D -->
-                <g class="wrapper-paper" filter="url(#drop-shadow)">
-                    <!-- Doblez Trasero Izquierdo -->
-                    <path d="M 100 250 L 200 370 L 140 470 L 80 290 Z" fill="#dfcca4" opacity="0.7" />
-                    
-                    <!-- Capa Principal Izquierda -->
-                    <path d="M 85 260 L 200 480 L 110 320 Z" fill="url(#paper-front)" />
-                    
-                    <!-- Capa Principal Derecha Envolvente -->
-                    <path d="M 315 260 L 200 480 L 290 320 Z" fill="url(#paper-back)" />
+                        <!-- TULIPÁN 1: CENTRO ALTO (Principal) -->
+                        <g class="tulip-bloom" style="animation-delay: 3.4s; transform-origin: 195px 175px;">
+                            <!-- Resplandor Dorado de Flor -->
+                            <circle cx="195" cy="170" r="35" fill="#ffaa00" opacity="0.3" filter="url(#gold-glow)" />
+                            <g filter="url(#shadow-3d)">
+                                <!-- Pétalo Trasero/Interior -->
+                                <path d="M 178 165 C 175 125 215 125 212 165 C 210 190 180 190 178 165 Z" fill="url(#tulip-petal-inner)" />
+                                <!-- Pétalo Izquierdo -->
+                                <path d="M 170 160 C 160 120 200 115 195 165 C 192 195 168 185 170 160 Z" fill="url(#tulip-petal-side)" />
+                                <!-- Pétalo Derecho -->
+                                <path d="M 220 160 C 230 120 190 115 195 165 C 198 195 222 185 220 160 Z" fill="url(#tulip-petal-side)" />
+                                <!-- Pétalo Frontal Principal (Forma Copado Tulipán) -->
+                                <path d="M 173 155 C 170 110 220 110 217 155 C 215 198 175 198 173 155 Z" fill="url(#tulip-petal-main)" />
+                                <!-- Luz/Brillo Curvo Frontal -->
+                                <path d="M 183 145 Q 195 135 207 145 Q 195 185 183 145 Z" fill="#ffffff" opacity="0.35" />
+                            </g>
+                        </g>
 
-                    <!-- Cono Central Envoltorio -->
-                    <path d="M 95 250 Q 200 290 305 250 L 230 485 Q 200 495 170 485 Z" fill="url(#paper-front)" />
-                    
-                    <!-- Pliegues y Sombras 3D del Papel -->
-                    <path d="M 160 310 Q 200 330 240 310 L 215 485 Q 200 490 185 485 Z" fill="#d9c3ab" opacity="0.5" />
-                    <path d="M 95 250 Q 150 300 170 485" stroke="#b89f83" stroke-width="1.5" fill="none" opacity="0.6" />
-                    <path d="M 305 250 Q 250 300 230 485" stroke="#b89f83" stroke-width="1.5" fill="none" opacity="0.6" />
-                </g>
+                        <!-- TULIPÁN 2: IZQUIERDA ALTO -->
+                        <g class="tulip-bloom" style="animation-delay: 3.6s; transform-origin: 145px 205px;">
+                            <circle cx="145" cy="200" r="32" fill="#ffaa00" opacity="0.25" filter="url(#gold-glow)" />
+                            <g filter="url(#shadow-3d)">
+                                <path d="M 130 195 C 128 160 162 160 160 195 C 158 218 132 218 130 195 Z" fill="url(#tulip-petal-inner)" />
+                                <path d="M 123 190 C 115 155 150 150 145 195 C 142 222 121 212 123 190 Z" fill="url(#tulip-petal-side)" />
+                                <path d="M 167 190 C 175 155 140 150 145 195 C 148 222 169 212 167 190 Z" fill="url(#tulip-petal-side)" />
+                                <path d="M 125 185 C 122 145 168 145 165 185 C 163 224 127 224 125 185 Z" fill="url(#tulip-petal-main)" />
+                                <path d="M 134 175 Q 145 167 156 175 Q 145 210 134 175 Z" fill="#ffffff" opacity="0.35" />
+                            </g>
+                        </g>
 
-                <!-- LAZO Y MOÑO ELEGANTE EN LA BASE -->
-                <g class="ribbon-bow" filter="url(#drop-shadow)">
-                    <!-- Cintas colgantes -->
-                    <path d="M 185 490 Q 160 540 135 580 Q 155 585 175 560 L 195 495 Z" fill="url(#ribbon-grad)" />
-                    <path d="M 215 490 Q 240 540 265 580 Q 245 585 225 560 L 205 495 Z" fill="url(#ribbon-grad)" />
+                        <!-- TULIPÁN 3: DERECHA ALTO -->
+                        <g class="tulip-bloom" style="animation-delay: 3.8s; transform-origin: 245px 215px;">
+                            <circle cx="245" cy="210" r="32" fill="#ffaa00" opacity="0.25" filter="url(#gold-glow)" />
+                            <g filter="url(#shadow-3d)">
+                                <path d="M 230 205 C 228 170 262 170 260 205 C 258 228 232 228 230 205 Z" fill="url(#tulip-petal-inner)" />
+                                <path d="M 223 200 C 215 165 250 160 245 205 C 242 232 221 222 223 200 Z" fill="url(#tulip-petal-side)" />
+                                <path d="M 267 200 C 275 165 240 160 245 205 C 248 232 269 222 267 200 Z" fill="url(#tulip-petal-side)" />
+                                <path d="M 225 195 C 222 155 268 155 265 195 C 263 234 227 234 225 195 Z" fill="url(#tulip-petal-main)" />
+                                <path d="M 234 185 Q 245 177 256 185 Q 245 220 234 185 Z" fill="#ffffff" opacity="0.35" />
+                            </g>
+                        </g>
 
-                    <!-- Orejas del Moño Izquierda -->
-                    <path d="M 195 485 C 130 440 110 500 190 495 Z" fill="url(#ribbon-grad)" />
-                    <path d="M 195 485 C 145 460 130 495 188 493 Z" fill="#dfb299" opacity="0.6" />
+                        <!-- TULIPÁN 4: IZQUIERDA MEDIO (Ligeramente Inclinado) -->
+                        <g class="tulip-bloom" style="animation-delay: 4.0s; transform-origin: 115px 250px;">
+                            <circle cx="115" cy="245" r="30" fill="#ffaa00" opacity="0.25" filter="url(#gold-glow)" />
+                            <g filter="url(#shadow-3d)" transform="rotate(-12 115 245)">
+                                <path d="M 102 238 C 100 205 132 205 130 238 C 128 259 104 259 102 238 Z" fill="url(#tulip-petal-inner)" />
+                                <path d="M 95 233 C 88 200 121 197 117 238 C 114 263 94 253 95 233 Z" fill="url(#tulip-petal-side)" />
+                                <path d="M 137 233 C 144 200 111 197 115 238 C 118 263 138 253 137 233 Z" fill="url(#tulip-petal-side)" />
+                                <path d="M 97 228 C 95 192 137 192 135 228 C 133 264 100 264 97 228 Z" fill="url(#tulip-petal-main)" />
+                                <path d="M 105 220 Q 116 212 126 220 Q 116 250 105 220 Z" fill="#ffffff" opacity="0.35" />
+                            </g>
+                        </g>
 
-                    <!-- Orejas del Moño Derecha -->
-                    <path d="M 205 485 C 270 440 290 500 210 495 Z" fill="url(#ribbon-grad)" />
-                    <path d="M 205 485 C 255 460 270 495 212 493 Z" fill="#dfb299" opacity="0.6" />
+                        <!-- TULIPÁN 5: DERECHA MEDIO (Ligeramente Inclinado) -->
+                        <g class="tulip-bloom" style="animation-delay: 4.2s; transform-origin: 270px 260px;">
+                            <circle cx="270" cy="255" r="30" fill="#ffaa00" opacity="0.25" filter="url(#gold-glow)" />
+                            <g filter="url(#shadow-3d)" transform="rotate(12 270 260)">
+                                <path d="M 257 253 C 255 220 287 220 285 253 C 283 274 259 274 257 253 Z" fill="url(#tulip-petal-inner)" />
+                                <path d="M 250 248 C 243 215 276 212 272 253 C 269 278 249 268 250 248 Z" fill="url(#tulip-petal-side)" />
+                                <path d="M 292 248 C 299 215 266 212 270 253 C 273 278 293 268 292 248 Z" fill="url(#tulip-petal-side)" />
+                                <path d="M 252 243 C 250 207 292 207 290 243 C 288 279 255 279 252 243 Z" fill="url(#tulip-petal-main)" />
+                                <path d="M 260 235 Q 271 227 281 235 Q 271 265 260 235 Z" fill="#ffffff" opacity="0.35" />
+                            </g>
+                        </g>
 
-                    <!-- Nudo Central -->
-                    <rect x="188" y="478" width="24" height="20" rx="5" fill="#8c5b43" />
-                    <rect x="190" y="480" width="20" height="16" rx="4" fill="url(#ribbon-grad)" />
-                </g>
 
-                <!-- DECORACIONES MAGICAS / DESTELLOS DE LUZ -->
-                <g class="sparkle-star" style="animation-delay: 0.5s;">
-                    <path d="M 270 180 L 273 187 L 280 190 L 273 193 L 270 200 L 267 193 L 260 190 L 267 187 Z" fill="#ffffff" filter="url(#glow-soft)" />
-                    <circle cx="270" cy="190" r="2" fill="#fff" />
-                </g>
-                <g class="sparkle-star" style="animation-delay: 1.2s;">
-                    <path d="M 100 160 L 102 165 L 107 167 L 102 169 L 100 174 L 98 169 L 93 167 L 98 165 Z" fill="#ffffff" filter="url(#glow-soft)" />
-                </g>
-                <g class="sparkle-star" style="animation-delay: 1.8s;">
-                    <path d="M 295 310 L 297 314 L 301 315 L 297 316 L 295 320 L 293 316 L 289 315 L 293 314 Z" fill="#ffeeaa" filter="url(#glow-soft)" />
+                        <!-- ENVOLTORIO FRONTAL COMPLETO CON LAZO Y TARJETA -->
+                        <g filter="url(#shadow-3d)">
+                            <!-- Doblez Izquierdo Papel -->
+                            <path d="M 95 240 L 195 380 L 145 475 L 85 270 Z" fill="#e3d2b8" opacity="0.8" />
+                            
+                            <!-- Doblez Derecho Papel -->
+                            <path d="M 295 240 L 195 380 L 245 475 L 305 270 Z" fill="#c4af93" opacity="0.9" />
+
+                            <!-- Cono Central Envoltorio Principal -->
+                            <path d="M 90 240 Q 195 285 300 240 L 235 475 Q 195 485 155 475 Z" fill="url(#paper-outer)" />
+                            
+                            <!-- Sombras de pliegue 3D del cono -->
+                            <path d="M 90 240 Q 150 300 165 475" stroke="#b59f84" stroke-width="2" fill="none" opacity="0.5" />
+                            <path d="M 300 240 Q 240 300 225 475" stroke="#b59f84" stroke-width="2" fill="none" opacity="0.5" />
+
+                            <!-- TARJETA COLGANTE ELEGANTE -->
+                            <g transform="rotate(-8 160 420)">
+                                <!-- Hilo de la Tarjeta -->
+                                <line x1="160" y1="400" x2="150" y2="425" stroke="#8c6d46" stroke-width="1.5" />
+                                <!-- Tarjeta -->
+                                <rect x="125" y="425" width="50" height="32" rx="4" fill="url(#tag-grad)" stroke="#d4af37" stroke-width="1" />
+                                <!-- Corazoncito y Línea en la tarjeta -->
+                                <path d="M 150 435 C 148 430 140 432 144 438 L 150 443 L 156 438 C 160 432 152 430 150 435 Z" fill="#d93838" />
+                                <line x1="135" y1="448" x2="165" y2="448" stroke="#a89274" stroke-width="1" stroke-dasharray="2,2" />
+                            </g>
+
+                            <!-- LAZO/MOÑO DORADO EN LA BASE DEL RAMO -->
+                            <g>
+                                <!-- Cintas colgantes -->
+                                <path d="M 185 470 Q 160 520 130 550 Q 150 555 175 530 L 192 475 Z" fill="url(#box-gold)" />
+                                <path d="M 205 470 Q 230 520 260 550 Q 240 555 215 530 L 198 475 Z" fill="url(#box-gold)" />
+
+                                <!-- Moño Izquierdo -->
+                                <path d="M 195 470 C 130 430 110 490 190 480 Z" fill="url(#box-gold)" />
+                                <!-- Moño Derecho -->
+                                <path d="M 195 470 C 260 430 280 490 200 480 Z" fill="url(#box-gold)" />
+
+                                <!-- Nudo Central Lazo -->
+                                <rect x="187" y="463" width="16" height="15" rx="4" fill="#614800" />
+                                <rect x="189" y="464" width="12" height="13" rx="3" fill="url(#box-gold)" />
+                            </g>
+                        </g>
+
+                        <!-- DESTELLOS MÁGICOS DE LUZ Y BRILLO EN EL RAMO -->
+                        <g class="sparkle-pop" style="animation-delay: 0.2s;">
+                            <path d="M 200 130 L 202 136 L 208 138 L 202 140 L 200 146 L 198 140 L 192 138 L 198 136 Z" fill="#ffffff" filter="url(#soft-glow)" />
+                        </g>
+                        <g class="sparkle-pop" style="animation-delay: 1.1s;">
+                            <path d="M 270 180 L 272 184 L 276 185 L 272 186 L 270 190 L 268 186 L 264 185 L 268 184 Z" fill="#ffea88" filter="url(#soft-glow)" />
+                        </g>
+                        <g class="sparkle-pop" style="animation-delay: 1.8s;">
+                            <path d="M 120 170 L 122 174 L 126 175 L 122 176 L 120 180 L 118 176 L 114 175 L 118 174 Z" fill="#ffffff" filter="url(#soft-glow)" />
+                        </g>
+
+                    </g>
                 </g>
             </svg>
         </div>
 
-        <!-- Texto Romántico Final -->
+        <!-- Texto Romántico Inferior -->
         <div class="romantic-text-container">
             <h1 class="romantic-text">Para la doctora más hermosa ❤️</h1>
         </div>
     </div>
 
-    <!-- JavaScript Interno para animación de partículas y estrellas -->
+    <!-- JavaScript para la animación de estrellas y partículas flotantes -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const canvas = document.getElementById('particles-canvas');
@@ -419,12 +546,11 @@
             resize();
             window.addEventListener('resize', resize);
 
-            // Crear Partículas y Estrellas
-            const numStars = 60;
-            const numGoldParticles = 45;
+            const numStars = 55;
+            const numParticles = 40;
             const elements = [];
 
-            // Clases para elementos del fondo
+            // Clase Estrellas Parpadeantes
             class Star {
                 constructor() {
                     this.reset();
@@ -433,19 +559,19 @@
                 reset() {
                     this.x = Math.random() * width;
                     this.y = Math.random() * height;
-                    this.size = Math.random() * 1.5 + 0.5;
+                    this.size = Math.random() * 1.4 + 0.4;
                     this.alpha = Math.random();
-                    this.speed = Math.random() * 0.02 + 0.005;
+                    this.speed = Math.random() * 0.015 + 0.005;
                     this.growing = Math.random() > 0.5;
                 }
 
                 update() {
                     if (this.growing) {
                         this.alpha += this.speed;
-                        if (this.alpha >= 1) this.growing = false;
+                        if (this.alpha >= 0.95) this.growing = false;
                     } else {
                         this.alpha -= this.speed;
-                        if (this.alpha <= 0.2) this.growing = true;
+                        if (this.alpha <= 0.15) this.growing = true;
                     }
                 }
 
@@ -460,6 +586,7 @@
                 }
             }
 
+            // Clase Partículas Doradas Flotantes
             class GoldParticle {
                 constructor() {
                     this.reset();
@@ -468,16 +595,16 @@
                 reset() {
                     this.x = Math.random() * width;
                     this.y = height + Math.random() * 20;
-                    this.size = Math.random() * 2.5 + 1;
-                    this.speedY = Math.random() * 0.8 + 0.3;
-                    this.speedX = (Math.random() - 0.5) * 0.5;
-                    this.alpha = Math.random() * 0.6 + 0.3;
+                    this.size = Math.random() * 2.2 + 0.8;
+                    this.speedY = Math.random() * 0.7 + 0.25;
+                    this.speedX = (Math.random() - 0.5) * 0.4;
+                    this.alpha = Math.random() * 0.7 + 0.3;
                     this.decay = Math.random() * 0.002 + 0.001;
                 }
 
                 update() {
                     this.y -= this.speedY;
-                    this.x += Math.sin(this.y * 0.02) * 0.4 + this.speedX;
+                    this.x += Math.sin(this.y * 0.015) * 0.35 + this.speedX;
                     this.alpha -= this.decay;
 
                     if (this.y < -10 || this.alpha <= 0) {
@@ -489,8 +616,8 @@
                     ctx.save();
                     ctx.globalAlpha = Math.max(0, this.alpha);
                     ctx.fillStyle = "#ffd700";
-                    ctx.shadowBlur = 8;
-                    ctx.shadowColor = "#ffaa00";
+                    ctx.shadowBlur = 6;
+                    ctx.shadowColor = "#ffb700";
                     ctx.beginPath();
                     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                     ctx.fill();
@@ -498,16 +625,16 @@
                 }
             }
 
-            // Inicializar arreglos
+            // Crear elementos
             for (let i = 0; i < numStars; i++) {
                 elements.push(new Star());
             }
 
-            for (let i = 0; i < numGoldParticles; i++) {
+            for (let i = 0; i < numParticles; i++) {
                 elements.push(new GoldParticle());
             }
 
-            // Loop de animación
+            // Loop de renderizado
             function animate() {
                 ctx.clearRect(0, 0, width, height);
 
@@ -523,4 +650,4 @@
         });
     </script>
 </body>
-</html>s
+</html>
