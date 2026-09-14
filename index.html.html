@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caja de Tulipanes Mágica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0; 
+      padding: 0; 
+      background: radial-gradient(circle at center, #1a1a2e 0%, #000000 100%);
+      display: flex; 
+      justify-content: center; 
+      align-items: center;
+      min-height: 100vh; 
+      overflow: hidden; 
+      font-family: 'Montserrat', sans-serif;
+    }
+    .container {
+      position: relative; 
+      width: 100%; 
+      max-width: 600px;
+      height: 100vh;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    /* Textos superiores e inferiores */
+    .title-top {
+      position: absolute;
+      top: 6%;
+      width: 100%;
+      text-align: center;
+      color: #ffd700;
+      font-size: clamp(14px, 4vw, 18px);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      font-weight: 600;
+      z-index: 10;
+      text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+    }
+    .footer-text {
+      position: absolute;
+      bottom: 6%;
+      width: 100%;
+      text-align: center;
+      font-family: 'Great Vibes', cursive;
+      color: #fff3d1;
+      font-size: clamp(28px, 8vw, 42px);
+      z-index: 10;
+      text-shadow: 0 0 20px rgba(255, 215, 0, 0.7), 0 0 40px rgba(255, 180, 0, 0.4);
+    }
+    .heart {
+      color: #ff3366;
+      display: inline-block;
+      animation: pulse-heart 1.5s infinite;
+      filter: drop-shadow(0 0 8px rgba(255, 51, 102, 0.8));
+    }
+    @keyframes pulse-heart {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    /* Partículas mágicas */
+    .particle {
+      position: absolute; 
+      width: 6px; 
+      height: 6px; 
+      background: #ffea00; 
+      border-radius: 50%;
+      opacity: 0; 
+      pointer-events: none;
+      box-shadow: 0 0 12px #ffea00, 0 0 20px #ffcc00;
+      z-index: 1;
+    }
+    .open .particle {
+      animation: sparkle 2s ease-out infinite;
+    }
+    @keyframes sparkle {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-160px) scale(0); opacity: 0; }
+    }
+
+    /* Animaciones del Ramo y Tapa - Ramo más grande al abrir */
+    #bouquet {
+      transition: transform 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.27), opacity 1.2s;
+      transform-origin: 200px 520px; 
+      transform: translate(200px, 520px) scale(0.1); 
+      opacity: 0;
+    }
+    .open #bouquet {
+      transform: translate(200px, 195px) scale(1.2); /* Más grande */
+      opacity: 1;
+    }
+
+    #lid {
+      transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1), opacity 1s;
+      transform-origin: 200px 515px;
+      transform: translate(200px, 515px); 
+    }
+    .open #lid {
+      transform: translate(150px, 240px) rotate(-20deg); 
+      opacity: 0;
+    }
+
+    /* Animación del listón */
+    #tied-ribbon { transition: opacity 0.4s; opacity: 1; }
+    #untied-ribbon { transition: opacity 1s 0.2s; opacity: 0; stroke-dasharray: 200; stroke-dashoffset: 200; }
+    .open #tied-ribbon { opacity: 0; }
+    .open #untied-ribbon { 
+      opacity: 1; 
+      animation: draw-ribbon 1s forwards ease-out;
+    }
+    @keyframes draw-ribbon {
+      to { stroke-dashoffset: 0; }
+    }
+
+    .hint {
+      position: absolute; 
+      bottom: 20%; 
+      width: 100%; 
+      text-align: center;
+      color: #ffe600; 
+      font-size: 13px; 
+      letter-spacing: 2px;
+      text-transform: uppercase; 
+      pointer-events: none;
+      transition: opacity 0.5s;
+      animation: pulse 1.5s infinite;
+      z-index: 10;
+      text-shadow: 0 0 8px rgba(255, 230, 0, 0.6);
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+    .open ~ .hint { opacity: 0; display: none; }
+    
+    svg {
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      max-height: 70vh; 
+      z-index: 5;
+      position: relative;
+      overflow: visible;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" onclick="this.classList.toggle('open')">
+    
+    <div class="title-top">Una Sorpresa Especial</div>
+
+    <svg viewBox="0 0 400 700">
+      <defs>
+        <!-- Gradientes más brillantes y vivos para evitar efecto opaco -->
+        <linearGradient id="boxGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#ffd700"/>
+          <stop offset="100%" stop-color="#e5b800"/>
+        </linearGradient>
+        <linearGradient id="coneGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#faebd7"/>
+          <stop offset="50%" stop-color="#e8cca5"/>
+          <stop offset="100%" stop-color="#c99f6c"/>
+        </linearGradient>
+        <linearGradient id="coneInner" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#8c6747"/>
+          <stop offset="100%" stop-color="#5e4228"/>
+        </linearGradient>
+
+        <!-- Tulipanes con colores más intensos, brillantes y luminosos -->
+        <radialGradient id="petalShine" cx="35%" cy="25%" r="80%">
+          <stop offset="0%" stop-color="#fffde7"/>
+          <stop offset="45%" stop-color="#ffd60a"/>
+          <stop offset="100%" stop-color="#ff8c00"/>
+        </radialGradient>
+        <filter id="flowerGlow" x="-60%" y="-60%" width="220%" height="220%">
+          <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#ffb703" flood-opacity="0.55"/>
+        </filter>
+
+        <g id="tulip_flower">
+          <path d="M 0,20 Q 5,60 0,120" fill="none" stroke="#234e1f" stroke-width="6" stroke-linecap="round"/>
+          <g filter="url(#flowerGlow)">
+            <path d="M -14,-4 C -14,-38 14,-38 14,-4 C 14,20 -14,20 -14,-4 Z" fill="#ff8c00"/>
+            <path d="M 0,25 C -32,25 -28,-20 -18,-35 C -12,-10 -3,18 0,25 Z" fill="url(#petalShine)" stroke="#e85d04" stroke-width="0.8"/>
+            <path d="M 0,25 C 32,25 28,-20 18,-35 C 12,-10 3,18 0,25 Z" fill="url(#petalShine)" stroke="#e85d04" stroke-width="0.8"/>
+            <path d="M -9,20 C -18,6 0,-18 0,-18 C 0,-18 18,6 9,20 C 4,24 -4,24 -9,20 Z" fill="#fff8dc"/>
+          </g>
+        </g>
+
+        <g id="tulip_leaf">
+          <path d="M 0,0 C -28,-45 -40,-100 0,-135 C 18,-75 24,-30 0,0 Z" fill="#2d6a4f"/>
+        </g>
+      </defs>
+
+      <!-- BOUQUET GROUP (Más grande, con flores expandidas y mejor distribuidas) -->
+      <g id="bouquet">
+        <!-- Pared trasera del envoltorio: va DETRÁS de las flores para que parezcan
+             nacer desde dentro del papel, en vez de quedar tapadas por él -->
+        <g transform="translate(0, 70)">
+          <path d="M -90,0 C -45,-28 45,-28 90,0 C 45,22 -45,22 -90,0 Z" fill="url(#coneInner)"/>
+        </g>
+
+        <use href="#tulip_leaf" x="-25" y="40" transform="rotate(-40, -25, 40) scale(1.15)"/>
+        <use href="#tulip_leaf" x="25" y="50" transform="rotate(40, 25, 50) scale(1.2)"/>
+
+        <!-- Flores laterales y centrales, más grandes y numerosas para un ramo más lleno -->
+        <use href="#tulip_flower" x="-70" y="-42" transform="rotate(-32, -70, -42) scale(1.3)" />
+        <use href="#tulip_flower" x="70" y="-38" transform="rotate(32, 70, -38) scale(1.3)" />
+
+        <use href="#tulip_flower" x="-40" y="-28" transform="rotate(-18, -40, -28) scale(1.35)" />
+        <use href="#tulip_flower" x="42" y="-22" transform="rotate(18, 42, -22) scale(1.35)" />
+
+        <use href="#tulip_flower" x="-15" y="-8" transform="rotate(-8, -15, -8) scale(1.3)" />
+        <use href="#tulip_flower" x="18" y="-4" transform="rotate(8, 18, -4) scale(1.3)" />
+
+        <use href="#tulip_flower" x="0" y="8" transform="scale(1.5)"/>
+
+        <use href="#tulip_leaf" x="-18" y="78" transform="rotate(-20, -18, 78) scale(0.9)"/>
+        <use href="#tulip_leaf" x="22" y="74" transform="rotate(25, 22, 74) scale(0.95)"/>
+
+        <!-- Papel frontal del envoltorio: se dibuja DESPUÉS de las flores, así solo
+             cubre la base de los tallos (como un ramo real) y no las flores mismas -->
+        <g transform="translate(0, 70)">
+          <path d="M -90,0 C -45,28 45,28 90,0 L 0,230 Z" fill="url(#coneGrad)"/>
+          <path d="M -90,0 L 0,230 L -40,15 Z" fill="rgba(0,0,0,0.06)"/>
+          <path d="M 90,0 L 0,230 L 40,15 Z" fill="rgba(255,255,255,0.3)"/>
+          <path d="M -22,20 L 0,230 L 22,20 Z" fill="rgba(0,0,0,0.04)"/>
+
+          <path d="M -35,145 C 0,165 35,145 40,155 C 0,175 -35,155 -35,145 Z" fill="#d90429"/>
+          <circle cx="2" cy="155" r="6" fill="#ef233c"/>
+          <path d="M 2,155 L -18,188 L -6,190 Z" fill="#ef233c"/>
+          <path d="M 2,155 L 18,188 L 6,190 Z" fill="#d90429"/>
+        </g>
+      </g>
+
+      <!-- GIFT BOX (Body) -->
+      <g id="box-body" transform="translate(200, 520)">
+        <ellipse cx="0" cy="120" rx="100" ry="15" fill="rgba(0,0,0,0.6)" filter="blur(6px)"/>
+        <rect x="-100" y="0" width="200" height="130" rx="8" fill="url(#boxGrad)"/>
+        <rect x="-18" y="0" width="36" height="130" fill="#ef233c"/>
+        <rect x="-18" y="0" width="6" height="130" fill="rgba(0,0,0,0.25)"/>
+        
+        <g id="untied-ribbon">
+          <path d="M -18,10 C -70,-20 -100,50 -60,110" fill="none" stroke="#ef233c" stroke-width="14" stroke-linecap="round"/>
+          <path d="M 18,10 C 70,-20 100,50 60,110" fill="none" stroke="#ef233c" stroke-width="14" stroke-linecap="round"/>
+          <path d="M -10,10 C -40,80 -80,140 -50,150" fill="none" stroke="#d90429" stroke-width="14" stroke-linecap="round"/>
+          <path d="M 10,10 C 40,80 80,140 50,150" fill="none" stroke="#d90429" stroke-width="14" stroke-linecap="round"/>
+        </g>
+      </g>
+
+      <!-- GIFT BOX LID -->
+      <g id="lid">
+        <rect x="-105" y="-25" width="210" height="35" rx="5" fill="#ffb703"/>
+        <rect x="-105" y="10" width="210" height="5" fill="rgba(0,0,0,0.2)"/>
+        <rect x="-18" y="-25" width="36" height="35" fill="#ef233c"/>
+        
+        <g id="tied-ribbon">
+          <path d="M 0,-25 C -50,-80 -100,-10 -20,-10 Z" fill="#ef233c"/>
+          <path d="M 0,-25 C -40,-60 -70,-15 -20,-15 Z" fill="#d90429"/>
+          <path d="M 0,-25 C 50,-80 100,-10 20,-10 Z" fill="#ef233c"/>
+          <path d="M 0,-25 C 40,-60 70,-15 20,-15 Z" fill="#d90429"/>
+          <circle cx="0" cy="-18" r="13" fill="#ef233c"/>
+          <circle cx="-2" cy="-20" r="4.5" fill="rgba(255,255,255,0.4)"/>
+        </g>
+      </g>
+    </svg>
+
+    <div class="hint">Toca la caja para abrir</div>
+    
+    <div class="footer-text">
+      Para la doctora más hermosa <span class="heart">❤️</span>
+    </div>
+
+  </div>
+
+  <script>
+     const container = document.querySelector('.container');
+     for(let i = 0; i < 45; i++) {
+        let p = document.createElement('div');
+        p.className = 'particle';
+        p.style.left = (Math.random() * 100) + '%';
+        p.style.top = (Math.random() * 60 + 20) + '%';
+        p.style.animationDelay = (Math.random() * 2) + 's';
+        p.style.animationDuration = (Math.random() * 1.5 + 1.5) + 's';
+        container.appendChild(p);
+     }
+  </script>
+</body>
+</html>
